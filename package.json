@@ -19,23 +19,24 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onStartupFinished","onCommand:extension.reloadDict"
+		"onStartupFinished"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"configuration": {
-			"title": "simple-dictionary",
-			"commands": [
+"commands": [
 				{
-				  "command": "extension.reloadDict",
-				  "title": "重载字典"
+				  "command": "simple-dictionary.reload-dict",
+				  "title": "reload dict 乐道拼音提示助手"
 				}
 			  ],
 			  "menus": {
 				"commandPalette": [{
-					"command": "extension.reloadDict"
+					"command": "simple-dictionary.reload-dict"
 				}]
 			},
+		"configuration": {
+			"title": "simple-dictionary",
+			
 			"properties": {
 				"simple-dictionary.dictPaths": {
 					"title": "Path list of dictionaries",

@@ -57,7 +57,7 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.window.showInformationMessage("自定义字典插件加载成功");
 
   // 定义操作
-  const command = "extension.reloadDict";
+  const command = "simple-dictionary.reload-dict";
 
   const commandHandler = (args: any[]) => {
     globalUserDict = makeDict();
@@ -65,8 +65,9 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.showInformationMessage("重新加载字典完成!");
   };
 
+  const cmdDisposable = vscode.commands.registerCommand(command, commandHandler)
   context.subscriptions.push(
-    vscode.commands.registerCommand(command, commandHandler)
+    cmdDisposable
   );
 
   // 定义hover处理
