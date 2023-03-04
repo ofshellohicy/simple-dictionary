@@ -60,6 +60,9 @@ export function findTips(rawWord: string, userDict: Dictionary) {
     // 假设各个分段不重复
     let newStr = rawWord;
     parts.forEach((x) => {
+      if (x.length === 1) {
+        return;
+      }
       const subParts = newStr.split(x);
       newStr = subParts.join(upper1stAndLast(x));
       console.log("rawWord", rawWord, "part", x, "subParts", subParts, newStr);
@@ -104,7 +107,7 @@ export function findTips(rawWord: string, userDict: Dictionary) {
             } else {
               inList.push(upper1st(wordWithOutSuffix));
             }
-            inList.push(userDict[suffix]);
+            inList.push(userDict[suffix] || upper1st(suffix));
             if (debugMode) {
               console.info("匹配到suffix", suffix, w);
             }

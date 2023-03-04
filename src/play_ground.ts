@@ -44,10 +44,12 @@ function test() {
     "cqfzr",
     "getZcqzjnm",
     "getPSHYList",
+    "selectPSHYInfoById",
   ];
   ss.forEach((s) => {
     let o = findTips(s, userDict);
     console.log(s, o);
+    console.log("\n\n\n");
   });
 
   // let s = "getLevel2SltByCqzjnm aasd";
