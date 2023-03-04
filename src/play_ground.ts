@@ -42,6 +42,8 @@ function test() {
     "conferenceName",
     "setPshynm",
     "cqfzr",
+    "getZcqzjnm",
+    "getPSHYList",
   ];
   ss.forEach((s) => {
     let o = findTips(s, userDict);

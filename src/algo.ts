@@ -50,6 +50,25 @@ export function findTips(rawWord: string, userDict: Dictionary) {
   if (lowerRawWord in userDict) {
     return userDict[lowerRawWord];
   }
+
+  if (rawWord.match(/[A-Z]{2,}/)) {
+    // rawWord = rawWord.replace("ID", "Id");
+
+    // 检查range
+    let parts = findUpperCase(rawWord);
+    console.log("输入的字符串包含连续的大写字母", parts);
+    // 假设各个分段不重复
+    let newStr = rawWord;
+    parts.forEach((x) => {
+      const subParts = newStr.split(x);
+      newStr = subParts.join(upper1stAndLast(x));
+      console.log("rawWord", rawWord, "part", x, "subParts", subParts, newStr);
+    });
+    rawWord = newStr;
+  } else {
+    // console.log("输入的字符串不包含连续的大写字母");
+  }
+
   // 2. 驼峰转为下划线
   const wordList = [];
   for (var w of camToStr(rawWord).split("_")) {
@@ -166,6 +185,13 @@ function upper1st(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1).toLowerCase();
 }
 
+function upper1stAndLast(str: string) {
+  return (
+    str.slice(0, 1).toUpperCase() +
+    str.slice(1, str.length - 1).toLowerCase() +
+    str.slice(str.length - 1).toUpperCase()
+  );
+}
 /*
 async function translate(
   source: string,
@@ -199,3 +225,23 @@ async function translate(
 }
 
 */
+
+function findUpperCase(str: string) {
+  var upperCases = [];
+  var currentCase = "";
+  for (var i = 0; i < str.length; i++) {
+    var char = str.charAt(i);
+    if (char >= "A" && char <= "Z") {
+      currentCase += char;
+    } else {
+      if (currentCase.length > 0) {
+        upperCases.push(currentCase);
+        currentCase = "";
+      }
+    }
+  }
+  if (currentCase.length > 0) {
+    upperCases.push(currentCase);
+  }
+  return upperCases;
+}
