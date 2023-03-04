@@ -34,9 +34,22 @@ initReg();
 
 function test() {
   console.log("userDict size", Object.keys(userDict).length);
-  let ss = ["zlwtxxnm", "zlwtJd", "zlwtjd"];
+  let ss = [
+    "zlwtxxnm",
+    "zlwtJd",
+    "zlwtjd",
+    "getLevel2SltByCqzjnm",
+    "conferenceName",
+    "setPshynm",
+    "cqfzr",
+  ];
   ss.forEach((s) => {
     let o = findTips(s, userDict);
     console.log(s, o);
   });
+
+  // let s = "getLevel2SltByCqzjnm aasd";
+  // s = s.split(" ")[0];
+  // s = s.split("\n")[0];
+  // console.log(s);
 }

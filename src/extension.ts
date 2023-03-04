@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as readline from "readline";
 import * as path from "path";
 
-import {initReg, Dictionary, findTips} from "./algo"
+import { initReg, Dictionary, findTips } from "./algo";
 
 const makeAbsPaths = (dictPathStr: string) => {
   if (fs.existsSync(dictPathStr)) {
@@ -43,8 +43,6 @@ const makeDict = () => {
 
 let globalUserDict: Dictionary = makeDict();
 
-
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -65,16 +63,19 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.showInformationMessage("重新加载字典完成!");
   };
 
-  const cmdDisposable = vscode.commands.registerCommand(command, commandHandler)
-  context.subscriptions.push(
-    cmdDisposable
+  const cmdDisposable = vscode.commands.registerCommand(
+    command,
+    commandHandler
   );
+  context.subscriptions.push(cmdDisposable);
 
   // 定义hover处理
   const disposable = vscode.languages.registerHoverProvider(["*"], {
     provideHover(document, position) {
       const range = document.getWordRangeAtPosition(position);
-      const word = document.getText(range);
+      let word = document.getText(range);
+      word = word.split(" ")[0];
+      word = word.split("\n")[0];
 
       const tip = findTips(word, globalUserDict);
       if (tip) {
