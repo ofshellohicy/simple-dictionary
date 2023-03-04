@@ -79,7 +79,12 @@ export function findTips(rawWord: string, userDict: Dictionary) {
           if (r.test(w)) {
             const wordWithOutSuffix = w.replace(r, "$1");
             const suffix = w.replace(wordWithOutSuffix, "");
-            inList.push(upper1st(wordWithOutSuffix));
+            const prefix = userDict[wordWithOutSuffix];
+            if (prefix) {
+              inList.push(prefix);
+            } else {
+              inList.push(upper1st(wordWithOutSuffix));
+            }
             inList.push(userDict[suffix]);
             if (debugMode) {
               console.info("匹配到suffix", suffix, w);
